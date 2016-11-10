@@ -1,0 +1,197 @@
+
+<html>
+<head>
+  <title>Food Rater</title>
+
+
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="stylesheets/style.css" rel="stylesheet">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js">
+ </script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js">
+
+  </script>
+
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="javascripts/comments.js"></script>
+  <script src="javascripts/app.js"></script>
+
+
+</head>
+<!-- <body ng-app="News" background="otherBackground.jpg"> -->
+<body ng-app="News" >
+
+<div class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+  <li class="nb-item"><a class="nb-item" href="index.html#/home">Home</a></li>
+  <li><a class="nb-item" href="index.html#/burger">Burgers</a></li>
+  <li><a class="nb-item" href="index.html#/burrito">Burritos</a></li>
+</ul>
+</div>
+</div>
+
+<!-- <div id="screen">
+</div> -->
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <ui-view></ui-view>
+    </div>
+  </div>
+
+  <script type="text/ng-template" id="/home.html">
+    <!-- <div class="page-header">
+      <h1>Home</h1>
+    </div>
+
+    <p>Welcome to this site. We will show food.</p> -->
+
+       <div id ="welcomeDiv" >
+       <h1 id="title">Food Rater<h1>
+
+       <h2 id="subtitle">Discover the best burgers or burritos in your area</h2>
+      </div>
+
+
+  </script>
+
+  <script type="text/ng-template" id="/moreFood.html">
+
+
+  <div class="page-header">
+  <h1>Burritos</h1>
+</div>
+
+<div class="postBlock">
+  <form class="postForm" ng-submit="addBurrito()">
+    <input class="postBar" type="text" placeholder="Name" ng-model="formContent"></input>
+    <br>
+    <br>
+    <input class="postBar" type="text" placeholder="Restaurant" ng-model="restaurantContent"></input>
+    <br>
+    <br>
+    <input class="postBar" type="text" placeholder="Image" ng-model="imageContent"></input>
+    <br>
+    <br>
+
+
+    <button type="submit">Post</button>
+
+  </form>
+  </div>
+
+
+  <div>
+
+  </div>
+  <div ng-repeat="bur in burrito | orderBy: '-upvotes'">
+  <div class="foodPostDiv">
+
+    <img class="foodPic" src='{{bur.image}}'>
+
+    <div class="caption">
+    <h2>#{{$index + 1}}</h2>
+    <p><strong>{{bur.title}}</strong> - {{bur.restaurant}}<p>
+    <span class="glyphicon glyphicon-arrow-up" ng-click="incrementUpvotes(bur)"></span>
+    <span class="glyphicon glyphicon-arrow-down" ng-click="decrementUpvotes(bur)"></span>
+     {{bur.upvotes}}
+<br>
+    <!-- <a class="comLink" href="#/posts/{{burrito.indexOf(bur)}}">Comments</a> -->
+    </div>
+    </div>
+  </div>
+
+  <!-- Comment section here -->
+  <div class="container">
+    <div class="row">
+
+        <form class="form-horizontal" id="commentForm" action="">
+
+          <div class="form-group">
+            <label for="name" class="control-label col-sm-2">Name: </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="Name" placeholder="Name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="comment" class="control-label col-sm-2">Comment: </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="Comment" placeholder="Comment">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+              <button class="btn btn-primary" id="Post">Post Comment</button>
+            </div>
+          </div>
+        </form>
+    </div>
+    <div id="CommentSection"></div>
+
+  </div>
+
+  </script>
+
+  <!-- Start Burger Page -->
+
+  <script type="text/ng-template" id="/food.html">
+
+
+ <div class="page-header">
+  <h1>Burgers</h1>
+</div>
+
+
+  <div>
+
+  </div>
+
+  <div class="postBlock">
+  <form class="postForm" ng-submit="addBurger()"">
+    <input class="postBar" type="text" placeholder="Name" ng-model="formContent"></input>
+    <br>
+    <br>
+    <input class="postBar" type="text" placeholder="Restaurant" ng-model="restaurantContent"></input>
+    <br>
+    <br>
+    <input class="postBar" type="text" placeholder="Image" ng-model="imageContent"></input>
+    <br>
+    <br>
+
+
+    <button type="submit">Post</button>
+
+  </form>
+  </div>
+  <div ng-repeat="burg in burger | orderBy: '-upvotes'">
+  <div class="foodPostDiv">
+
+    <img class="foodPic" src='{{burg.image}}'>
+
+    <div class="caption">
+    <h2>#{{$index + 1}}</h2>
+    <p><strong>{{burg.title}}</strong> - {{burg.restaurant}}<p>
+    <span class="glyphicon glyphicon-arrow-up" ng-click="incrementUpvotes(burg)"></span>
+    <span class="glyphicon glyphicon-arrow-down" ng-click="decrementUpvotes(burg)"></span>
+     {{burg.upvotes}}
+     <br>
+    <!-- <a class="comLink" href="#/posts/{{burger.indexOf(burg)}}">Comments</a> -->
+    </div>
+    </div>
+
+  </div>
+
+
+  </script>
+</body>
+</html>
